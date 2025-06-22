@@ -74,7 +74,7 @@
 					},
 					"compression": {
 						"type": "ZipDeflate",
-						"level": "Fastest"
+						"level": "Optimal"
 					}
 				}
 			},
@@ -97,6 +97,43 @@
 					"location": {
 						"type": "AzureBlobFSLocation",
 						"fileSystem": "bronze"
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/FDA_DL_STORAGE')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/BinaryUnzip')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "FDA_DL_STORAGE",
+					"type": "LinkedServiceReference"
+				},
+				"parameters": {
+					"filename": {
+						"type": "string",
+						"defaultValue": "*.zip"
+					}
+				},
+				"annotations": [],
+				"type": "Binary",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileName": {
+							"value": "@dataset().filename",
+							"type": "Expression"
+						},
+						"folderPath": "food/event",
+						"fileSystem": "bronze"
+					},
+					"compression": {
+						"type": "ZipDeflate",
+						"level": "Optimal"
 					}
 				}
 			},
