@@ -27,10 +27,6 @@
 					"type": "Expression"
 				},
 				"fileSystem": "bronze"
-			},
-			"compression": {
-				"type": "ZipDeflate",
-				"level": "Optimal"
 			}
 		},
 		"schema": {
