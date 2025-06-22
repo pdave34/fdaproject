@@ -1,0 +1,19 @@
+{
+	"name": "BinaryUnzip",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "FDA_DL_STORAGE",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Binary",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "*.zip",
+				"folderPath": "food/event",
+				"fileSystem": "bronze"
+			}
+		}
+	}
+}
