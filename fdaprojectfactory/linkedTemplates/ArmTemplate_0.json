@@ -57,54 +57,6 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/FDArawzip')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "FDA_HTTP",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "Binary",
-				"typeProperties": {
-					"location": {
-						"type": "HttpServerLocation",
-						"relativeUrl": "food/event/food-event-0001-of-0001.json.zip"
-					},
-					"compression": {
-						"type": "ZipDeflate",
-						"level": "Optimal"
-					}
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/FDA_HTTP')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/DLrawzip')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "FDA_DL_STORAGE",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "Binary",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobFSLocation",
-						"fileSystem": "bronze"
-					}
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/FDA_DL_STORAGE')]"
-			]
-		},
-		{
 			"name": "[concat(parameters('factoryName'), '/BinaryUnzip')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -139,6 +91,404 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/linkedServices/FDA_DL_STORAGE')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DLrawzip')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "FDA_DL_STORAGE",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Binary",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileSystem": "bronze"
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/FDA_DL_STORAGE')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DLrawzip_dynamic')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "FDA_DL_STORAGE",
+					"type": "LinkedServiceReference"
+				},
+				"parameters": {
+					"filename": {
+						"type": "string"
+					},
+					"foldername": {
+						"type": "string"
+					}
+				},
+				"annotations": [],
+				"type": "Json",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileName": {
+							"value": "@dataset().filename",
+							"type": "Expression"
+						},
+						"folderPath": {
+							"value": "@dataset().foldername",
+							"type": "Expression"
+						},
+						"fileSystem": "bronze"
+					},
+					"compression": {
+						"type": "ZipDeflate",
+						"level": "Optimal"
+					}
+				},
+				"schema": {
+					"type": "object",
+					"properties": {
+						"meta": {
+							"type": "object",
+							"properties": {
+								"disclaimer": {
+									"type": "string"
+								},
+								"terms": {
+									"type": "string"
+								},
+								"license": {
+									"type": "string"
+								},
+								"last_updated": {
+									"type": "string"
+								},
+								"results": {
+									"type": "object",
+									"properties": {
+										"skip": {
+											"type": "integer"
+										},
+										"limit": {
+											"type": "integer"
+										},
+										"total": {
+											"type": "integer"
+										}
+									}
+								}
+							}
+						},
+						"results": {
+							"type": "array",
+							"items": {
+								"type": "object",
+								"properties": {
+									"report_number": {
+										"type": "string"
+									},
+									"outcomes": {
+										"type": "array",
+										"items": {
+											"type": "string"
+										}
+									},
+									"date_created": {
+										"type": "string"
+									},
+									"reactions": {
+										"type": "array",
+										"items": {
+											"type": "string"
+										}
+									},
+									"date_started": {
+										"type": "null"
+									},
+									"consumer": {
+										"type": "object",
+										"properties": {
+											"gender": {
+												"type": "string"
+											}
+										}
+									},
+									"products": {
+										"type": "array",
+										"items": {
+											"type": "object",
+											"properties": {
+												"role": {
+													"type": "string"
+												},
+												"name_brand": {
+													"type": "string"
+												},
+												"industry_code": {
+													"type": "string"
+												},
+												"industry_name": {
+													"type": "string"
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/FDA_DL_STORAGE')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/FDArawzip')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "FDA_HTTP",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Binary",
+				"typeProperties": {
+					"location": {
+						"type": "HttpServerLocation",
+						"relativeUrl": "food/event/food-event-0001-of-0001.json.zip"
+					},
+					"compression": {
+						"type": "ZipDeflate",
+						"level": "Optimal"
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/FDA_HTTP')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/FDArawzip_dynamic')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "FDA_HTTP",
+					"type": "LinkedServiceReference"
+				},
+				"parameters": {
+					"rel_url": {
+						"type": "string"
+					}
+				},
+				"annotations": [],
+				"type": "Json",
+				"typeProperties": {
+					"location": {
+						"type": "HttpServerLocation",
+						"relativeUrl": {
+							"value": "@dataset().rel_url",
+							"type": "Expression"
+						}
+					},
+					"compression": {
+						"type": "ZipDeflate",
+						"level": "Optimal"
+					}
+				},
+				"schema": {}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/FDA_HTTP')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/JsonParam')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "FDA_DL_STORAGE",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Json",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileName": "fda.json",
+						"fileSystem": "parameters"
+					}
+				},
+				"schema": {
+					"type": "object",
+					"properties": {
+						"rel_url": {
+							"type": "string"
+						},
+						"foldername": {
+							"type": "string"
+						},
+						"filename": {
+							"type": "string"
+						}
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/FDA_DL_STORAGE')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DynamicFDA')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "ForEach",
+						"type": "ForEach",
+						"dependsOn": [
+							{
+								"activity": "Lookup",
+								"dependencyConditions": [
+									"Completed"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"items": {
+								"value": "@activity('Lookup').output.value",
+								"type": "Expression"
+							},
+							"isSequential": false,
+							"activities": [
+								{
+									"name": "DynamicCopy",
+									"type": "Copy",
+									"dependsOn": [],
+									"policy": {
+										"timeout": "0.12:00:00",
+										"retry": 0,
+										"retryIntervalInSeconds": 30,
+										"secureOutput": false,
+										"secureInput": false
+									},
+									"userProperties": [],
+									"typeProperties": {
+										"source": {
+											"type": "JsonSource",
+											"storeSettings": {
+												"type": "HttpReadSettings",
+												"requestMethod": "GET"
+											},
+											"formatSettings": {
+												"type": "JsonReadSettings",
+												"compressionProperties": {
+													"type": "ZipDeflateReadSettings"
+												}
+											}
+										},
+										"sink": {
+											"type": "JsonSink",
+											"storeSettings": {
+												"type": "AzureBlobFSWriteSettings"
+											},
+											"formatSettings": {
+												"type": "JsonWriteSettings"
+											}
+										},
+										"enableStaging": false
+									},
+									"inputs": [
+										{
+											"referenceName": "FDArawzip_dynamic",
+											"type": "DatasetReference",
+											"parameters": {
+												"rel_url": {
+													"value": "@item().rel_url",
+													"type": "Expression"
+												}
+											}
+										}
+									],
+									"outputs": [
+										{
+											"referenceName": "DLrawzip_dynamic",
+											"type": "DatasetReference",
+											"parameters": {
+												"filename": {
+													"value": "@item().filename",
+													"type": "Expression"
+												},
+												"foldername": {
+													"value": "@item().foldername",
+													"type": "Expression"
+												}
+											}
+										}
+									]
+								}
+							]
+						}
+					},
+					{
+						"name": "Lookup",
+						"type": "Lookup",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "JsonSource",
+								"storeSettings": {
+									"type": "AzureBlobFSReadSettings",
+									"recursive": true,
+									"enablePartitionDiscovery": false
+								},
+								"formatSettings": {
+									"type": "JsonReadSettings"
+								}
+							},
+							"dataset": {
+								"referenceName": "JsonParam",
+								"type": "DatasetReference",
+								"parameters": {}
+							},
+							"firstRowOnly": false
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {}
+				},
+				"variables": {
+					"rel_url": {
+						"type": "String"
+					}
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/JsonParam')]",
+				"[concat(variables('factoryId'), '/datasets/FDArawzip_dynamic')]",
+				"[concat(variables('factoryId'), '/datasets/DLrawzip_dynamic')]"
 			]
 		},
 		{
@@ -214,6 +564,11 @@
 				],
 				"policy": {
 					"elapsedTimeMetric": {}
+				},
+				"variables": {
+					"rel_url": {
+						"type": "String"
+					}
 				},
 				"annotations": []
 			},
