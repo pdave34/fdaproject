@@ -1,0 +1,123 @@
+{
+	"name": "DLrawzip_dynamic",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "FDA_DL_STORAGE",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"filename": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": {
+					"value": "@dataset().filename",
+					"type": "Expression"
+				},
+				"fileSystem": "bronze"
+			},
+			"compression": {
+				"type": "ZipDeflate",
+				"level": "Optimal"
+			}
+		},
+		"schema": {
+			"type": "object",
+			"properties": {
+				"meta": {
+					"type": "object",
+					"properties": {
+						"disclaimer": {
+							"type": "string"
+						},
+						"terms": {
+							"type": "string"
+						},
+						"license": {
+							"type": "string"
+						},
+						"last_updated": {
+							"type": "string"
+						},
+						"results": {
+							"type": "object",
+							"properties": {
+								"skip": {
+									"type": "integer"
+								},
+								"limit": {
+									"type": "integer"
+								},
+								"total": {
+									"type": "integer"
+								}
+							}
+						}
+					}
+				},
+				"results": {
+					"type": "array",
+					"items": {
+						"type": "object",
+						"properties": {
+							"report_number": {
+								"type": "string"
+							},
+							"outcomes": {
+								"type": "array",
+								"items": {
+									"type": "string"
+								}
+							},
+							"date_created": {
+								"type": "string"
+							},
+							"reactions": {
+								"type": "array",
+								"items": {
+									"type": "string"
+								}
+							},
+							"date_started": {
+								"type": "null"
+							},
+							"consumer": {
+								"type": "object",
+								"properties": {
+									"gender": {
+										"type": "string"
+									}
+								}
+							},
+							"products": {
+								"type": "array",
+								"items": {
+									"type": "object",
+									"properties": {
+										"role": {
+											"type": "string"
+										},
+										"name_brand": {
+											"type": "string"
+										},
+										"industry_code": {
+											"type": "string"
+										},
+										"industry_name": {
+											"type": "string"
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
