@@ -65,9 +65,16 @@
 				]
 			},
 			{
-				"name": "Unzip",
+				"name": "UnzipRaw",
 				"type": "GetMetadata",
-				"dependsOn": [],
+				"dependsOn": [
+					{
+						"activity": "CopyRaw",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
 				"policy": {
 					"timeout": "0.12:00:00",
 					"retry": 0,
