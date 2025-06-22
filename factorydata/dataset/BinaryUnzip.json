@@ -5,6 +5,12 @@
 			"referenceName": "FDA_DL_STORAGE",
 			"type": "LinkedServiceReference"
 		},
+		"parameters": {
+			"filename": {
+				"type": "string",
+				"defaultValue": "*.zip"
+			}
+		},
 		"annotations": [],
 		"type": "Binary",
 		"typeProperties": {
@@ -13,6 +19,10 @@
 				"fileName": "*.zip",
 				"folderPath": "food/event",
 				"fileSystem": "bronze"
+			},
+			"compression": {
+				"type": "ZipDeflate",
+				"level": "Optimal"
 			}
 		}
 	}
