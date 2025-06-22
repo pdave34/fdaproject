@@ -5,8 +5,6 @@
 			{
 				"name": "ForEach",
 				"type": "ForEach",
-				"state": "Inactive",
-				"onInactiveMarkAs": "Skipped",
 				"dependsOn": [
 					{
 						"activity": "Lookup",
@@ -26,8 +24,6 @@
 						{
 							"name": "DynamicCopy",
 							"type": "Copy",
-							"state": "Inactive",
-							"onInactiveMarkAs": "Skipped",
 							"dependsOn": [],
 							"policy": {
 								"timeout": "0.12:00:00",
