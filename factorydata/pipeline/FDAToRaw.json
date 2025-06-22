@@ -79,7 +79,10 @@
 				"typeProperties": {
 					"dataset": {
 						"referenceName": "BinaryUnzip",
-						"type": "DatasetReference"
+						"type": "DatasetReference",
+						"parameters": {
+							"filename": "*.zip"
+						}
 					},
 					"fieldList": [
 						"itemName"
