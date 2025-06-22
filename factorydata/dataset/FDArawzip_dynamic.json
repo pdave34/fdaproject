@@ -1,0 +1,30 @@
+{
+	"name": "FDArawzip_dynamic",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "FDA_HTTP",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"rel_url": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "HttpServerLocation",
+				"relativeUrl": {
+					"value": "@dataset().rel_url",
+					"type": "Expression"
+				}
+			},
+			"compression": {
+				"type": "ZipDeflate",
+				"level": "Optimal"
+			}
+		},
+		"schema": {}
+	}
+}
