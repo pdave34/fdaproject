@@ -1,0 +1,9 @@
+{
+	"name": "fdaprojectfactory",
+	"properties": {
+		"globalConfigurations": {
+			"PipelineBillingEnabled": "true"
+		}
+	},
+	"location": "eastus"
+}
