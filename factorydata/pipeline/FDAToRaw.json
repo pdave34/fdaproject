@@ -16,40 +16,53 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"enableStaging": false
-				}
-			},
-			{
-				"name": "Unzip",
-				"type": "GetMetadata",
-				"dependsOn": [],
-				"policy": {
-					"timeout": "0.12:00:00",
-					"retry": 0,
-					"retryIntervalInSeconds": 30,
-					"secureOutput": false,
-					"secureInput": false
-				},
-				"userProperties": [],
-				"typeProperties": {
-					"dataset": {
-						"referenceName": "Binary1",
-						"type": "DatasetReference",
-						"parameters": {
-							"filename": "*.zip"
+					"source": {
+						"type": "BinarySource",
+						"storeSettings": {
+							"type": "HttpReadSettings",
+							"requestMethod": "GET"
+						},
+						"formatSettings": {
+							"type": "BinaryReadSettings",
+							"compressionProperties": {
+								"type": "ZipDeflateReadSettings"
+							}
 						}
 					},
-					"fieldList": [
-						"itemName"
-					],
-					"storeSettings": {
-						"type": "AzureBlobFSReadSettings",
-						"enablePartitionDiscovery": false
+					"sink": {
+						"type": "BinarySink",
+						"storeSettings": {
+							"type": "AzureBlobFSWriteSettings"
+						}
 					},
-					"formatSettings": {
-						"type": "BinaryReadSettings"
+					"enableStaging": false,
+					"logSettings": {
+						"enableCopyActivityLog": true,
+						"copyActivityLogSettings": {
+							"logLevel": "Info",
+							"enableReliableLogging": false
+						},
+						"logLocationSettings": {
+							"linkedServiceName": {
+								"referenceName": "FDA_DL_STORAGE",
+								"type": "LinkedServiceReference"
+							},
+							"path": "bronze"
+						}
 					}
-				}
+				},
+				"inputs": [
+					{
+						"referenceName": "FDArawzip",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "DLrawzip",
+						"type": "DatasetReference"
+					}
+				]
 			}
 		],
 		"annotations": []

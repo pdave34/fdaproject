@@ -1,0 +1,17 @@
+{
+	"name": "DLrawzip",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "FDA_DL_STORAGE",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Binary",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileSystem": "bronze"
+			}
+		}
+	}
+}
