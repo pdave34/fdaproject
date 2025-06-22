@@ -1,0 +1,24 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "fdaprojectfactory"
+		},
+		"FDA_DL_STORAGE_accountKey": {
+			"value": ""
+		},
+		"FDA_DL_STORAGE_properties_typeProperties_url": {
+			"value": "https://fdaprojectlake.dfs.core.windows.net/"
+		},
+		"FDA_HTTP_properties_typeProperties_url": {
+			"value": "https://download.open.fda.gov"
+		},
+		"containerUri": {
+			"value": ""
+		},
+		"containerSasToken": {
+			"value": ""
+		}
+	}
+}
