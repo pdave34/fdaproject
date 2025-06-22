@@ -1,0 +1,21 @@
+{
+	"name": "FDArawzip",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "FDA_HTTP",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Binary",
+		"typeProperties": {
+			"location": {
+				"type": "HttpServerLocation",
+				"relativeUrl": "food/event/food-event-0001-of-0001.json.zip"
+			},
+			"compression": {
+				"type": "ZipDeflate",
+				"level": "Fastest"
+			}
+		}
+	}
+}
