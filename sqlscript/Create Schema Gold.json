@@ -1,0 +1,17 @@
+{
+	"name": "Create Schema Gold",
+	"properties": {
+		"content": {
+			"query": "CREATE SCHEMA gold;",
+			"metadata": {
+				"language": "sql"
+			},
+			"currentConnection": {
+				"databaseName": "fda",
+				"poolName": "Built-in"
+			},
+			"resultLimit": 5000
+		},
+		"type": "SqlQuery"
+	}
+}
