@@ -1,0 +1,17 @@
+{
+	"name": "CreateViewsGold",
+	"properties": {
+		"content": {
+			"query": "CREATE VIEW gold.events \nAS \n    SELECT *\n    FROM OPENROWSET(\n        BULK 'https://fdaprojectlake.dfs.core.windows.net/silver/food/event/food-event-0001-of-0001.parquet.snappy/',\n        FORMAT = 'PARQUET'\n        ) AS query1",
+			"metadata": {
+				"language": "sql"
+			},
+			"currentConnection": {
+				"databaseName": "fda",
+				"poolName": "Built-in"
+			},
+			"resultLimit": 5000
+		},
+		"type": "SqlQuery"
+	}
+}
