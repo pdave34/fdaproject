@@ -1,0 +1,18 @@
+{
+	"name": "SQL script 1",
+	"properties": {
+		"description": "test",
+		"content": {
+			"query": "SELECT TOP(10) *\nFROM OPENROWSET(\n    BULK 'https://fdaprojectlake.dfs.core.windows.net/silver/food/event/food-event-0001-of-0001.parquet.snappy/',\n    FORMAT = 'PARQUET'\n) as query1",
+			"metadata": {
+				"language": "sql"
+			},
+			"currentConnection": {
+				"databaseName": "fda",
+				"poolName": "Built-in"
+			},
+			"resultLimit": 5000
+		},
+		"type": "SqlQuery"
+	}
+}
