@@ -50,8 +50,8 @@ Azure Data Factory → Azure Blob Storage - Bronze (JSON) → Azure Databricks E
 ## 📊 Quick Insights
 
 - Reporting frequency over time
-<img src="plots/annual-freq.png" width="400">
+<img src="plots/annual-freq.png" width="600">
 - Top industries associated with adverse event reports
-<img src="plots/industry-freq.png" width="400">
+<img src="plots/industry-freq.png" width="600">
 - Most reported symptoms
-<img src="plots/reactions-freq.png" width="400">
+<img src="plots/reactions-freq.png" width="600">
