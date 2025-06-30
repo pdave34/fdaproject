@@ -4,9 +4,13 @@ This project demonstrates an end-to-end data engineering solution using the Azur
 
 ---
 
-## 🚀 Architecture Overview
+## 🚀 Medallion Architecture Overview
+
+The pipeline follows **[medallion architecture](https://www.databricks.com/glossary/medallion-architecture)** from raw JSON to Power BI.
 
 Azure Data Factory → Azure Blob Storage - Bronze (JSON) → Azure Databricks ETL → Azure Blob Storage - Silver (Parquet) → Azure Synapse Analytics - Gold (Serverless SQL) → Power BI
+
+
 
 ## 🔧 Tools & Services Used
 
