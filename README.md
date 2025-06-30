@@ -55,5 +55,11 @@ Azure Data Factory → Azure Blob Storage - Bronze (JSON) → Azure Databricks E
 - Top industries associated with adverse event reports
 <img src="plots/industry-freq.png" width="1200">
 
-- Top symptoms reported due to food adverse events
+- Top reactions reported due to food adverse events
 <img src="plots/reactions-freq.png" width="1200">
+
+## 🧪 Future Improvements
+
+- Automate pipeline execution with Azure Data Factory triggers
+- Enable data refresh in Power BI
+- Add CI/CD deployment using Azure DevOps or GitHub Actions
