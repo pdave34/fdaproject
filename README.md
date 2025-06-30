@@ -2,6 +2,9 @@
 
 This project demonstrates an end-to-end data engineering solution using the Azure ecosystem to process and analyze openFDA's **[Adverse Food Event](https://open.fda.gov/apis/food/event/)** data, which is reported by consumers. The goal is to build a scalable pipeline that moves raw data through bronze, silver, and gold layers using a Lakehouse architecture, and visualize insights with Power BI.
 
+- BI Dashboard
+<img src="plots/report-bi.png" width="1200">
+
 ---
 
 ## 🚀 Medallion Architecture Overview
