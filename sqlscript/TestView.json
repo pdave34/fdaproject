@@ -2,7 +2,7 @@
 	"name": "TestView",
 	"properties": {
 		"content": {
-			"query": "SELECT TOP(5) *\nFROM gold.events",
+			"query": "SELECT TOP(5) *\nFROM gold.events\n\nSELECT TOP(5) \n    I.industry_name,\n    R.reactions,\n    O.outcomes,\n    count(DISTINCT R.record_id) as 'count_reports'\nFROM gold.extreactions R \n    LEFT JOIN gold.extproducts_industry I on R.record_id=I.record_id\n    LEFT JOIN gold.extoutcomes O on R.record_id=O.record_id\nGROUP BY I.industry_name, R.reactions, O.outcomes\nORDER BY 4 desc",
 			"metadata": {
 				"language": "sql"
 			},
