@@ -40,6 +40,20 @@ Azure Data Factory → Azure Blob Storage - Bronze (JSON) → Azure Databricks E
   - Clean and normalize data
   - Convert to **Parquet** format with **Snappy** compression
 - **Destination**: Azure Blob Storage (Silver Container)
+- pySpark Snippet:
+```python
+raw = df.select(explode(col('results')).alias('raw'))\
+        .withColumn('record_id', monotonically_increasing_id())
+
+consumer = raw.select('record_id', 
+                      'raw.report_number',
+                      'raw.consumer.age',
+                      'raw.consumer.gender',
+                      to_date('raw.date_created', 'yyyyMMdd').alias('date_created'),
+                      to_date('raw.date_started', 'yyyyMMdd').alias('date_started'))
+consumer = consumer.withColumn('age', consumer['age'].cast(DecimalType()))
+```
+
 
 ### 3. **Data Modeling (Gold Layer)**
 - **Tool**: Azure Synapse Analytics (Serverless SQL Pool)
@@ -53,6 +67,8 @@ Azure Data Factory → Azure Blob Storage - Bronze (JSON) → Azure Databricks E
 - **Process**:
   - Connect Power BI to Synapse SQL Serverless endpoint
   - Build interactive reports and dashboards for insight into adverse food events
+- Power BI data model schematic:
+<img src="plots/schema.png" width="1200">
 
 ## 📊 Quick Insights
 
@@ -70,3 +86,4 @@ Azure Data Factory → Azure Blob Storage - Bronze (JSON) → Azure Databricks E
 - Automate pipeline execution with Azure Data Factory triggers
 - Enable data refresh in Power BI
 - Add CI/CD deployment using Azure DevOps or GitHub Actions
+- Add error handling and monitoring
